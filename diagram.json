@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "author": "Anonymous maker",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "board-esp32-devkit-c-v4",
+      "id": "esp",
+      "top": 0,
+      "left": 4.84,
+      "attrs": {
+        "ssid": "Wokwi-GUEST",
+        "password": ""
+      }
+    },
+    { "type": "wokwi-dht22", "id": "dht1", "top": -230.1, "left": 23.4, "attrs": {} },
+    { "type": "wokwi-mpu6050", "id": "imu1", "top": 311.02, "left": 11.92, "attrs": {} },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": -62.4,
+      "left": 18.65,
+      "rotate": 90,
+      "attrs": { "value": "10000" }
+    }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "esp:GND.1", "imu1:GND", "black", [ "h-14.21", "v134.4", "h81.48" ] ],
+    [ "esp:GND.2", "dht1:GND", "black", [ "h14.44", "v-86.4" ] ],
+    [ "esp:3V3", "dht1:VCC", "green", [ "h-14.21", "v-86.4" ] ],
+    [ "r1:1", "dht1:SDA", "#8f4814", [ "v-19.2", "h19.1" ] ],
+    [ "r1:2", "esp:15", "#8f4814", [ "h86.4", "v200.4" ] ],
+    [ "esp:3V3", "imu1:VCC", "green", [ "h-28.65", "v268.8", "h105.52" ] ],
+    [ "imu1:SDA", "esp:21", "gray", [ "v-76.8", "h57.68", "v-163.2" ] ],
+    [ "imu1:SCL", "esp:22", "orange", [ "v-67.2", "h57.68", "v-201.6" ] ]
+  ],
+  "dependencies": {}
+}

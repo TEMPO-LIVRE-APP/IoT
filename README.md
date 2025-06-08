@@ -30,7 +30,7 @@ Este projeto implementa um sistema de monitoramento IoT que coleta dados ambient
 
 ## 📺 Video de Demostração
 
-#### Link do [YouTube](https://youtube.com)
+#### Link do [YouTube](https://youtu.be/NsYGkFWhY1s)
 
 ## ⚡ Funcionalidades
 

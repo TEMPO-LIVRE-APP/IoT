@@ -1,0 +1,27 @@
+{
+  "name": "tempo-livre-esp32",
+  "version": "1.0.0",
+  "description": "Servidor node-red para leitura de dispositivos IoT",
+  "keywords": [
+    "esp32",
+    "arduino",
+    "node-red",
+    "api"
+  ],
+  "homepage": "https://github.com/TEMPO-LIVRE-APP/IoT/tree/node-red-deploy#readme",
+  "bugs": {
+    "url": "https://github.com/TEMPO-LIVRE-APP/IoT/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TEMPO-LIVRE-APP/IoT.git#node-red-deploy"
+  },
+  "license": "MIT",
+  "author": "Daniel Barros",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node-red"
+  }
+}

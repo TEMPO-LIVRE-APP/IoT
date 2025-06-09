@@ -1,0 +1,963 @@
+[
+    {
+        "id": "d5c6a3eb75c4d5c5",
+        "type": "tab",
+        "label": "Fluxo 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "298093f51e7ecf64",
+        "type": "mqtt in",
+        "z": "d5c6a3eb75c4d5c5",
+        "name": "",
+        "topic": "iot/esp32/solo",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "3943d297c5f72acd",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 90,
+        "y": 480,
+        "wires": [
+            [
+                "8372725f289e680f",
+                "4b44748ccc6e9e1a",
+                "4e5459e0deebb239",
+                "7236cd1127929964"
+            ]
+        ]
+    },
+    {
+        "id": "8372725f289e680f",
+        "type": "debug",
+        "z": "d5c6a3eb75c4d5c5",
+        "name": "Dado HiveMQ",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 320,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "d382f8621231617f",
+        "type": "inject",
+        "z": "d5c6a3eb75c4d5c5",
+        "name": "Umidade 65%",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"id\":\"123\",\"horario\":\"06/06/25 07:48:57\",\"temperatura\":23.15,\"umidade\":65,\"ax\":0,\"ay\":0,\"az\":16384,\"latitude\":-23.550501,\"longitude\":-46.633301}",
+        "payloadType": "json",
+        "x": 110,
+        "y": 180,
+        "wires": [
+            [
+                "576df0ecd7f5fa7e"
+            ]
+        ]
+    },
+    {
+        "id": "576df0ecd7f5fa7e",
+        "type": "mqtt out",
+        "z": "d5c6a3eb75c4d5c5",
+        "name": "",
+        "topic": "iot/esp32/solo",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "3943d297c5f72acd",
+        "x": 320,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "9947dde02150ed89",
+        "type": "debug",
+        "z": "d5c6a3eb75c4d5c5",
+        "name": "Dado Alerta",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 590,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "1d32e08956dcc98c",
+        "type": "inject",
+        "z": "d5c6a3eb75c4d5c5",
+        "name": "Umidade 50%",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"id\":\"123\",\"horario\":\"06/06/25 07:48:57\",\"temperatura\":34.15,\"umidade\":50,\"ax\":9384,\"ay\":12384,\"az\":16384,\"latitude\":-23.550501,\"longitude\":-46.633301}",
+        "payloadType": "json",
+        "x": 110,
+        "y": 120,
+        "wires": [
+            [
+                "576df0ecd7f5fa7e"
+            ]
+        ]
+    },
+    {
+        "id": "2d29d5eb27829db6",
+        "type": "inject",
+        "z": "d5c6a3eb75c4d5c5",
+        "name": "Umidade 80%",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"id\":\"123\",\"horario\":\"06/06/25 07:48:57\",\"temperatura\":23.15,\"umidade\":80,\"ax\":0,\"ay\":0,\"az\":16384,\"latitude\":-23.550501,\"longitude\":-46.633301}",
+        "payloadType": "json",
+        "x": 110,
+        "y": 240,
+        "wires": [
+            [
+                "576df0ecd7f5fa7e"
+            ]
+        ]
+    },
+    {
+        "id": "5fb428e1e1d575fa",
+        "type": "http in",
+        "z": "d5c6a3eb75c4d5c5",
+        "name": "request",
+        "url": "/api/data/alerts",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 370,
+        "y": 540,
+        "wires": [
+            [
+                "bfe9ba0170af4477"
+            ]
+        ]
+    },
+    {
+        "id": "bfe9ba0170af4477",
+        "type": "function",
+        "z": "d5c6a3eb75c4d5c5",
+        "name": "alertPayload",
+        "func": "msg.payload = flow.get(\"lastPayload\") || {};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 480,
+        "wires": [
+            [
+                "25680be8bbfe1a09",
+                "74861ba445473c05",
+                "73f54b9efdf39a30"
+            ]
+        ]
+    },
+    {
+        "id": "25680be8bbfe1a09",
+        "type": "http response",
+        "z": "d5c6a3eb75c4d5c5",
+        "name": "response",
+        "statusCode": "",
+        "headers": {},
+        "x": 780,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "eb12bf6ecb55c80e",
+        "type": "comment",
+        "z": "d5c6a3eb75c4d5c5",
+        "name": "Simulação de valores e envio para o HiveMQ",
+        "info": "",
+        "x": 190,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "2c4ee42c4110c934",
+        "type": "comment",
+        "z": "d5c6a3eb75c4d5c5",
+        "name": "Leitura de sensores vindos do HiveMQ",
+        "info": "",
+        "x": 170,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "80ad4e296705f983",
+        "type": "comment",
+        "z": "d5c6a3eb75c4d5c5",
+        "name": "http://IP:PORT/api/ws/alerts",
+        "info": "",
+        "x": 840,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "7237768b7fd2ae94",
+        "type": "comment",
+        "z": "d5c6a3eb75c4d5c5",
+        "name": "http://IP:PORT/api/data/alerts",
+        "info": "",
+        "x": 840,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "4b44748ccc6e9e1a",
+        "type": "function",
+        "z": "d5c6a3eb75c4d5c5",
+        "name": "alertFilterPayload",
+        "func": "let status = false;\nlet newPayload;\nconst payload = msg.payload;\n\nif(payload.umidade > 60){\n    status = true;\n    newPayload = {\n        \"id\": `${payload.id}`,\n        \"aviso\": \"Risco de deslizamento\",\n        \"alerta\": `Umidade está em ${payload.umidade}%`,\n        \"observacao\": \"Acima do limite!\",\n    }\n    flow.set(\"lastPayload\", msg.payload = newPayload);\n}\n\nif(payload.temperatura > 32){\n    status = true;\n    newPayload = {\n        \"id\": `${payload.id}`,\n        \"aviso\": \"Dia Muito quente\",\n        \"alerta\": `Temperatura está em ${payload.temperatura}°`,\n        \"observacao\": \"Acima do limite!\",\n    }\n    flow.set(\"lastPayload\", msg.payload = newPayload);\n}\n\nif(status){\n    return msg;\n}\n\nstatus = false;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 480,
+        "wires": [
+            [
+                "9947dde02150ed89",
+                "bfe9ba0170af4477"
+            ]
+        ]
+    },
+    {
+        "id": "74861ba445473c05",
+        "type": "websocket out",
+        "z": "d5c6a3eb75c4d5c5",
+        "name": "WebSocket",
+        "server": "5f6fd13635fe2b2e",
+        "client": "",
+        "x": 790,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "4adfa0d427887ade",
+        "type": "ui_gauge",
+        "z": "d5c6a3eb75c4d5c5",
+        "name": "Temperatura",
+        "group": "4c0816e6433ab0da",
+        "order": 1,
+        "width": 6,
+        "height": 5,
+        "gtype": "gage",
+        "title": "Temperatura °C",
+        "label": "°C",
+        "format": "{{value}}",
+        "min": "-20",
+        "max": "70",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "25",
+        "seg2": "38",
+        "diff": false,
+        "className": "",
+        "x": 510,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "e3b4923e7a25b497",
+        "type": "ui_gauge",
+        "z": "d5c6a3eb75c4d5c5",
+        "name": "Umidade",
+        "group": "4c0816e6433ab0da",
+        "order": 3,
+        "width": 6,
+        "height": 5,
+        "gtype": "gage",
+        "title": "Umidade (%)",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#ffbe6f",
+            "#99c1f1",
+            "#1a5fb4"
+        ],
+        "seg1": "45",
+        "seg2": "70",
+        "diff": false,
+        "className": "",
+        "x": 500,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "903fb952fea28ca0",
+        "type": "ui_slider",
+        "z": "d5c6a3eb75c4d5c5",
+        "name": "Temp °C",
+        "label": "Temp °C",
+        "tooltip": "",
+        "group": "b5240a39a0dac5be",
+        "order": 2,
+        "width": 6,
+        "height": 1,
+        "passthru": true,
+        "outs": "all",
+        "topic": "temperatura",
+        "topicType": "str",
+        "min": "-20",
+        "max": "70",
+        "step": "5",
+        "className": "",
+        "x": 100,
+        "y": 960,
+        "wires": [
+            [
+                "5f35bc8db3523d39"
+            ]
+        ]
+    },
+    {
+        "id": "af3aac3922709e34",
+        "type": "ui_slider",
+        "z": "d5c6a3eb75c4d5c5",
+        "name": "Umidade",
+        "label": "Umidade",
+        "tooltip": "",
+        "group": "b5240a39a0dac5be",
+        "order": 3,
+        "width": 6,
+        "height": 1,
+        "passthru": true,
+        "outs": "all",
+        "topic": "umidade",
+        "topicType": "str",
+        "min": 0,
+        "max": "100",
+        "step": "5",
+        "className": "",
+        "x": 100,
+        "y": 1000,
+        "wires": [
+            [
+                "5f35bc8db3523d39"
+            ]
+        ]
+    },
+    {
+        "id": "4e5459e0deebb239",
+        "type": "function",
+        "z": "d5c6a3eb75c4d5c5",
+        "name": "Difusion",
+        "func": "const dados = msg.payload;\n\nreturn [\n    { payload: dados.temperatura }, // saída 1\n    { payload: dados.umidade },     // saída 2\n    { payload: dados.ax },          // saída 3\n    { payload: dados.ay },          // saída 4\n    { payload: dados.az },          // saída 5\n    { payload: dados.latitude },    // saída 6\n    { payload: dados.longitude }    // saída 7\n];",
+        "outputs": 5,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 760,
+        "wires": [
+            [
+                "4adfa0d427887ade"
+            ],
+            [
+                "e3b4923e7a25b497"
+            ],
+            [
+                "b6268ec7f651dfeb"
+            ],
+            [
+                "78d3fe527b0403ab"
+            ],
+            [
+                "3fdf5de292726955"
+            ]
+        ]
+    },
+    {
+        "id": "b6268ec7f651dfeb",
+        "type": "ui_gauge",
+        "z": "d5c6a3eb75c4d5c5",
+        "name": "Aceleração X (m/s²)",
+        "group": "e954e39076af4528",
+        "order": 1,
+        "width": 5,
+        "height": 3,
+        "gtype": "compass",
+        "title": "Aceleração X (m/s²)",
+        "label": "(m/s²)",
+        "format": "{{value}}",
+        "min": "-16384",
+        "max": "16382",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 540,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "78d3fe527b0403ab",
+        "type": "ui_gauge",
+        "z": "d5c6a3eb75c4d5c5",
+        "name": "Aceleração Y (m/s²)",
+        "group": "e954e39076af4528",
+        "order": 3,
+        "width": 5,
+        "height": 3,
+        "gtype": "compass",
+        "title": "Aceleração Y (m/s²)",
+        "label": "(m/s²)",
+        "format": "{{value}}",
+        "min": "-16384",
+        "max": "16382",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 540,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "3fdf5de292726955",
+        "type": "ui_gauge",
+        "z": "d5c6a3eb75c4d5c5",
+        "name": "Aceleração Z (m/s²)",
+        "group": "e954e39076af4528",
+        "order": 5,
+        "width": 5,
+        "height": 3,
+        "gtype": "compass",
+        "title": "Aceleração Z (m/s²)",
+        "label": "(m/s²)",
+        "format": "{{value}}",
+        "min": "-16384",
+        "max": "16382",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 530,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "204309a0af717604",
+        "type": "ui_slider",
+        "z": "d5c6a3eb75c4d5c5",
+        "name": "X (m/s²)",
+        "label": "X (m/s²)",
+        "tooltip": "",
+        "group": "b5240a39a0dac5be",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "outs": "all",
+        "topic": "ax",
+        "topicType": "str",
+        "min": "-16384",
+        "max": "16384",
+        "step": "100",
+        "className": "",
+        "x": 100,
+        "y": 1040,
+        "wires": [
+            [
+                "5f35bc8db3523d39"
+            ]
+        ]
+    },
+    {
+        "id": "3186ecf61632cbd2",
+        "type": "ui_slider",
+        "z": "d5c6a3eb75c4d5c5",
+        "name": "Y (m/s²)",
+        "label": "Y (m/s²)",
+        "tooltip": "",
+        "group": "b5240a39a0dac5be",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "outs": "all",
+        "topic": "ay",
+        "topicType": "str",
+        "min": "-16384",
+        "max": "16384",
+        "step": "100",
+        "className": "",
+        "x": 100,
+        "y": 1080,
+        "wires": [
+            [
+                "5f35bc8db3523d39"
+            ]
+        ]
+    },
+    {
+        "id": "e8946e3ca63c1bee",
+        "type": "ui_slider",
+        "z": "d5c6a3eb75c4d5c5",
+        "name": "Z (m/s²)",
+        "label": "Z (m/s²)",
+        "tooltip": "",
+        "group": "b5240a39a0dac5be",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "outs": "all",
+        "topic": "az",
+        "topicType": "str",
+        "min": "-16384",
+        "max": "16384",
+        "step": "100",
+        "className": "",
+        "x": 100,
+        "y": 1120,
+        "wires": [
+            [
+                "5f35bc8db3523d39"
+            ]
+        ]
+    },
+    {
+        "id": "0c60cc56e447a734",
+        "type": "ui_text",
+        "z": "d5c6a3eb75c4d5c5",
+        "group": "b5240a39a0dac5be",
+        "order": 1,
+        "width": 6,
+        "height": 5,
+        "name": "Message Log",
+        "label": "",
+        "format": "<pre>{{msg.payload}}</pre>",
+        "layout": "col-center",
+        "className": "",
+        "style": true,
+        "font": "",
+        "fontSize": "12",
+        "color": "#f5c211",
+        "x": 520,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "7236cd1127929964",
+        "type": "function",
+        "z": "d5c6a3eb75c4d5c5",
+        "name": "payloadWrapper",
+        "func": "msg.payload = JSON.stringify(msg.payload, null, 2); // Formatação bonita\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 620,
+        "wires": [
+            [
+                "0c60cc56e447a734"
+            ]
+        ]
+    },
+    {
+        "id": "5f35bc8db3523d39",
+        "type": "join",
+        "z": "d5c6a3eb75c4d5c5",
+        "name": "",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "useparts": false,
+        "accumulate": true,
+        "timeout": "",
+        "count": "5",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 300,
+        "y": 1040,
+        "wires": [
+            [
+                "78840de3b7df874a"
+            ]
+        ]
+    },
+    {
+        "id": "a566417947e902b2",
+        "type": "mqtt out",
+        "z": "d5c6a3eb75c4d5c5",
+        "name": "",
+        "topic": "iot/esp32/solo",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "3943d297c5f72acd",
+        "x": 680,
+        "y": 1100,
+        "wires": []
+    },
+    {
+        "id": "a0c6d06ab6819230",
+        "type": "ui_button",
+        "z": "d5c6a3eb75c4d5c5",
+        "name": "Enviar",
+        "group": "b5240a39a0dac5be",
+        "order": 7,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Enviar",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "topic": "enviar",
+        "topicType": "str",
+        "x": 290,
+        "y": 1100,
+        "wires": [
+            [
+                "f195fe0a02c0b871"
+            ]
+        ]
+    },
+    {
+        "id": "78840de3b7df874a",
+        "type": "function",
+        "z": "d5c6a3eb75c4d5c5",
+        "name": "payloadMount",
+        "func": "const payloadOrdenado = {\n    id: \"24:0A:C4:00:01:10\",\n    horario: new Date().toLocaleString(\"pt-BR\"),\n    temperatura: msg.payload.temperatura,\n    umidade: msg.payload.umidade,\n    ax: msg.payload.ax,\n    ay: msg.payload.ay,\n    az: msg.payload.az,\n    latitude: -23.550501,\n    longitude: -46.633301\n};\n\n// Força a conversão em string com chaves ordenadas\nmsg.payload = JSON.stringify(payloadOrdenado);\n\n// msg.topic = \"sensor/dados\"; // ajuste conforme seu HiveMQ\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 540,
+        "y": 1040,
+        "wires": [
+            [
+                "e8edd5dcb7cda197"
+            ]
+        ]
+    },
+    {
+        "id": "3f4e045ba0bd7599",
+        "type": "debug",
+        "z": "d5c6a3eb75c4d5c5",
+        "name": "Payload",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 960,
+        "y": 1040,
+        "wires": []
+    },
+    {
+        "id": "e8edd5dcb7cda197",
+        "type": "function",
+        "z": "d5c6a3eb75c4d5c5",
+        "name": "payloadStorage",
+        "func": "flow.set(\"payloadMount\", msg.payload);\nreturn null;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 760,
+        "y": 1040,
+        "wires": [
+            [
+                "3f4e045ba0bd7599"
+            ]
+        ]
+    },
+    {
+        "id": "f195fe0a02c0b871",
+        "type": "function",
+        "z": "d5c6a3eb75c4d5c5",
+        "name": "sendToMqtt",
+        "func": "msg.payload = flow.get(\"payloadMount\") || {};\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 1100,
+        "wires": [
+            [
+                "a566417947e902b2"
+            ]
+        ]
+    },
+    {
+        "id": "143e40393897ec6a",
+        "type": "ui_toast",
+        "z": "d5c6a3eb75c4d5c5",
+        "position": "top right",
+        "displayTime": "10",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "className": "",
+        "topic": "",
+        "name": "Notification",
+        "x": 990,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "73f54b9efdf39a30",
+        "type": "function",
+        "z": "d5c6a3eb75c4d5c5",
+        "name": "parseNotification",
+        "func": "msg.topic = msg.payload.alerta;\nmsg.payload = msg.payload.aviso;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 810,
+        "y": 620,
+        "wires": [
+            [
+                "143e40393897ec6a"
+            ]
+        ]
+    },
+    {
+        "id": "9251c9df971427ba",
+        "type": "comment",
+        "z": "d5c6a3eb75c4d5c5",
+        "name": "Simulação de valores e envio para o HiveMQ com sliders",
+        "info": "",
+        "x": 250,
+        "y": 900,
+        "wires": []
+    },
+    {
+        "id": "225f6d24bc63a276",
+        "type": "ui_spacer",
+        "z": "d5c6a3eb75c4d5c5",
+        "name": "spacer",
+        "group": "c92a75c9df66c75f",
+        "order": 1,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "e78bee78d91057ec",
+        "type": "ui_spacer",
+        "z": "d5c6a3eb75c4d5c5",
+        "name": "spacer",
+        "group": "e954e39076af4528",
+        "order": 2,
+        "width": 5,
+        "height": 1
+    },
+    {
+        "id": "ce5cfd257232f463",
+        "type": "ui_spacer",
+        "z": "d5c6a3eb75c4d5c5",
+        "name": "spacer",
+        "group": "e954e39076af4528",
+        "order": 4,
+        "width": 5,
+        "height": 1
+    },
+    {
+        "id": "b7416d04a20a50e8",
+        "type": "ui_spacer",
+        "z": "d5c6a3eb75c4d5c5",
+        "name": "spacer",
+        "group": "4c0816e6433ab0da",
+        "order": 2,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "3943d297c5f72acd",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "broker.hivemq.com",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "5f6fd13635fe2b2e",
+        "type": "websocket-listener",
+        "d": true,
+        "path": "/api/ws/alerts",
+        "wholemsg": "false"
+    },
+    {
+        "id": "4c0816e6433ab0da",
+        "type": "ui_group",
+        "name": "Ambiente",
+        "tab": "0b7f038b3ddddddb",
+        "order": 2,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "b5240a39a0dac5be",
+        "type": "ui_group",
+        "name": "Log",
+        "tab": "0b7f038b3ddddddb",
+        "order": 4,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "e954e39076af4528",
+        "type": "ui_group",
+        "name": "Movimento",
+        "tab": "0b7f038b3ddddddb",
+        "order": 1,
+        "disp": true,
+        "width": 5,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "c92a75c9df66c75f",
+        "type": "ui_group",
+        "name": "Gauges",
+        "tab": "",
+        "order": 1,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "0b7f038b3ddddddb",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    }
+]
